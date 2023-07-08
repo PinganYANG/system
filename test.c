@@ -384,6 +384,73 @@ float calculateRecyclingCost() {
     return totalCost;
 }
 
+void sortData() {
+    int choice;
+    printf("1. 通过手机品牌排序 ----------------\n");
+    printf("2. 通过职工号排序   ----------------\n");
+    printf("3. 通过手机新旧程度排序-------------\n");
+    printf("4. 通过手机入库/出库/拆解价格排序---\n");
+    scanf("%d", &choice);
+
+
+    switch (choice) {
+        PhoneRecord temp;
+        case 1:
+            for (int i = 0; i < numRecords - 1; i++) {
+                for (int j = 0; j < numRecords - 1 - i; j++) {
+                    if (strcmp(records[j].brand, records[j + 1].brand) > 0) 
+                    {
+                        temp = records[j];
+                        records[j] = records[j + 1];
+                        records[j + 1] = temp;
+                    }
+                }
+            }
+            printf("排序已完成，请返回主菜单通过输出功能查看排序结果\n");
+            break;
+        case 2:
+            for (int i = 0; i<numRecords-1; i++) {
+                for (int j = 0; j<numRecords - 1 - i; j++) {
+                    if (records[j].recordId > records[j + 1].recordId) {
+                        temp = records[j];
+                        records[j] = records[j + 1];
+                        records[j + 1] = temp;
+                    }
+                }
+            }
+             printf("排序已完成，请返回主菜单通过输出功能查看排序结果\n");
+            break;
+        case 3:
+            for (int i = 0; i<numRecords - 1; i++) {
+                for (int j = 0; j < numRecords - 1 - i; j++) {
+                    if (records[j].condition > records[j + 1].condition) {
+                        temp = records[j];
+                        records[j] = records[j + 1];
+                        records[j + 1] = temp;
+                    }
+                }
+            }
+             printf("排序已完成，请返回主菜单通过输出功能查看排序结果\n");
+            break;
+        case 4:
+            for (int i = 0; i < numRecords - 1; i++) {
+                for (int j = 0; j < numRecords - 1 - i; j++) {
+                    if (records[j].price > records[j + 1].price) {
+                         temp = records[j];
+                        records[j] = records[j + 1];
+                        records[j + 1] = temp;
+                    }
+                }
+            }
+             printf("排序已完成，请返回主菜单通过输出功能查看排序结果\n");
+            break;
+        default:
+            printf("无效的选项,请重新输入以进行排序\n\n");
+            return sortData();
+    }
+}
+
+
 int main() {
     readRecordsFromFile("././data.txt");
 
@@ -417,7 +484,7 @@ int main() {
             searchByCondition();
             break;
         case 4:
-            qsort(records, numRecords, sizeof(PhoneRecord), compareRecords);
+            sortData();
             printf("成功排序记录！\n");
             break;
         case 5:
