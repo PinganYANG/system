@@ -146,7 +146,7 @@ void addRecord() {
 void displayRecords() {
     printf("编号\t品牌\t型号\t新旧程度\t屏幕破损\t卖家姓名\t卖家电话\t当前状态\t日期\t\t价格\t操作人员姓名\t操作人员工号\n");
     for (int i = 0; i < numRecords; i++) {
-        printf("%d\t\t%s\t%s\t%d\t\t%s\t\t%s\t\t%d\t\t%s\t%.2f\t%s\t\t%d\n",
+        printf("%d\t%s\t%s\t%d\t%s\t\t%s\t\t%s\t\t%d\t\t%s\t%.2f\t%s\t\t%d\n",
             records[i].recordId,
             records[i].brand,
             records[i].model,
@@ -160,7 +160,7 @@ void displayRecords() {
             records[i].personnelName,
             records[i].personnelId
         );
-    }
+    }   
 }
 
 
@@ -262,7 +262,18 @@ void searchByCondition() {
 
 
 // 修改信息
-/*void modifyRecord(int recordId,PhoneRecord* records,int numRecords) {
+void modifyRecord() {
+    // 展示id
+    for (int i = 0; i < numRecords; i++) {
+        printf("ID：%d",
+            records[i].recordId
+        );
+    }  
+    // 请输入要修改的id
+    // int recordId = scanf("%d", );
+    int recordId = 1;
+    // recordId=输入的id
+
     int found = 0;
 
     for (int i = 0; i < numRecords; i++) {
@@ -299,7 +310,7 @@ void searchByCondition() {
             printf("请输入新的操作人员工号: ");
             scanf("%d", &records[i].personnelId);
 
-            saveRecordsToFile("data.txt");
+            saveRecordsToFile("./data.txt");
             printf("记录已成功修改！\n");
             break;
         }
@@ -308,7 +319,8 @@ void searchByCondition() {
     if (!found) {
         printf("找不到指定的记录！\n");
     }
-}*/
+}
+
 /*void modifyRecord(int recordId, char* brand, char* model, int condition, int isScreenBroken, char* sellerName, char* sellerPhone, Status status, char* date, float price, char* personnelName, int personnelId) {
     for (int i = 0; i < numRecords; i++) {
         if (records[i].recordId == recordId) {
@@ -373,7 +385,7 @@ float calculateRecyclingCost() {
 }
 
 int main() {
-    readRecordsFromFile("data.txt");
+    readRecordsFromFile("././data.txt");
 
     int choice;
     do {
@@ -409,13 +421,14 @@ int main() {
             printf("成功排序记录！\n");
             break;
         case 5:
-            saveRecordsToFile("data.txt");
+            saveRecordsToFile("./data.txt");
             printf("成功保存记录到文件！\n");
             break;
-        /*case 6:
-            modifyRecord();*/
+        case 6:
+            modifyRecord();
+            break;
         case 7:
-            deleteRecord();
+            deleteRecord(1);
             break;
         case 8:
             calculateRecyclingCost();
